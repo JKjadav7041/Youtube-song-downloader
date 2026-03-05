@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gujarati Song Downloader</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-orb orb-a"></div>
+  <div class="bg-orb orb-b"></div>
+
+  <main class="app-shell">
+    <header class="app-header">
+      <p class="eyebrow">Music Utility</p>
+      <h1>Gujarati Song Downloader</h1>
+    </header>
+
+    <section class="upload-panel">
+      <label for="file" class="upload-box" id="uploadBox">
+        <input type="file" id="file" accept=".xls,.xlsx,.csv" />
+        <span class="upload-title">Upload Excel File</span>
+        <span class="upload-subtitle" id="fileName">No file selected</span>
+      </label>
+
+      <button type="button" id="downloadBtn" class="start-btn">
+        <span class="btn-text">Start Download</span>
+      </button>
+    </section>
+
+    <section class="status-panel">
+      <div class="status-wrap">
+        <span id="spinner" class="spinner hidden" aria-hidden="true"></span>
+        <p id="status">Ready to download songs.</p>
+      </div>
+      <div class="view-toggle">
+        <button type="button" id="gridBtn" class="toggle-btn active">Grid View</button>
+        <button type="button" id="listBtn" class="toggle-btn">List View</button>
+      </div>
+    </section>
+
+    <section>
+      <div id="songs" class="songs-grid" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
