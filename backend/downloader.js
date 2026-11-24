@@ -1,24 +1,41 @@
-const { exec } = require("child_process")
 
-function downloadSong(link){
+const { execFile } = require("child_process");
 
-return new Promise((resolve,reject)=>{
+function downloadSong(link) {
 
-const command=`python -m yt_dlp --no-overwrites -x --audio-format mp3 --ffmpeg-location "C:\\ffmpeg-8.0.1-essentials_build\\bin" -o "../downloads/%(title)s-%(id)s.%(ext)s" ${link}`
+    return new Promise((resolve, reject) => {
 
-exec(command,(error,stdout,stderr)=>{
+        const args = [
+            "--no-overwrites",
+            "--js-runtimes", "node",
+            "-x",
+            "--audio-format", "mp3",
+            "--ffmpeg-location",
+            "C:\\ffmpeg-8.0.1-essentials_build\\bin",
+            "-o",
+            "../downloads/%(title)s-%(id)s.%(ext)s",
+            link
+        ];
 
-if(error){
-console.log(stderr)
-reject(error)
-}else{
-resolve(stdout)
+        execFile(
+            "python",
+            ["-m", "yt_dlp", ...args],
+            { cwd: __dirname },
+            (error, stdout, stderr) => {
+
+                if (error) {
+                    console.log("Download Error:", stderr);
+                    reject(new Error(stderr || error.message));
+                    return;
+                }
+
+                console.log("Download Complete!");
+                resolve(stdout);
+            }
+        );
+
+    });
+
 }
 
-})
-
-})
-
-}
-
-module.exports = downloadSong
+module.exports = downloadSong;
